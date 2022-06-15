@@ -1,10 +1,30 @@
-import  express  from "express";
-
-const router = express.Router();
-
-router.get("/", (req,res)=>{
-res.send("Hello, this is auth endpoint")
-})
+import mongoose from "mongoose";
 
 
-export default router
+const USerSchema = new mongoose.Schema({
+
+    username: {
+        type: String,
+        required: true,
+        unique:true
+
+    },
+    email: {
+        type: String,
+        required: true,
+           unique:true
+        }, 
+    password: {
+        type: String,
+        required: true
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
+    }
+
+},
+{timestamps:true}
+)
+
+export default mongoose.model("User", USerSchema)
